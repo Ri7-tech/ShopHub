@@ -1,0 +1,101 @@
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CiShoppingCart } from "react-icons/ci";
+import { cartContext } from "./Context/Context";
+import { toast } from "react-toastify";
+import { Toast } from "react-bootstrap";
+import { initializeApp } from "firebase/app";
+import app from "../../Config/Firebase";
+import { getDatabase, ref, set } from "firebase/database";
+
+export default function ProductCart({ product }) {
+  var { cartItem, setCartItem } = useContext(cartContext);
+  var discount_price = (product.price * product.discount_percentage) / 100;
+  var discount_price = product.price - discount_price;
+
+  var addCart = (productInfo) => {
+    var checkId = cartItem.filter((v) => {
+      if (productInfo.id == v.id) {
+        return v;
+      }
+    });
+
+    if (checkId.length > 0) {
+      var finalData = cartItem.map((v) => {
+        if (productInfo.id == v.id) {
+          v.quantity++;
+          return v;
+        } else {
+          return v;
+        }
+      });
+    } else {
+      var info = {
+        id: productInfo.id,
+        name: productInfo.name,
+        price: productInfo.price,
+        quantity: productInfo.quantity,
+        image: productInfo.image,
+      };
+
+      var finalData = [...cartItem, info];
+      setCartItem(finalData);
+      localStorage.setItem("cartItem", JSON.stringify(finalData));
+
+      const db = getDatabase(app);
+      set(ref(db, "users_cart/" + userId), info);
+    }
+  };
+
+  return (
+    <>
+      <div class="col">
+        <div class="card h-100">
+          <div class="position-relative">
+            <img src={product.image} class="card-img-top" alt="TV" />
+            <span class="position-absolute top-0 start-0 badge bg-danger m-2">
+              Sale
+            </span>
+          </div>
+          <div class="card-body">
+            <Link
+              className="text-decoration-none text-black"
+              to={`${"/product/product-details/" + product.id}`}
+            >
+              <h5 class="card-title">{product.name}</h5>
+            </Link>
+            <p class="card-text text-muted small mb-0">
+              {product.category_name}
+            </p>
+            <div class="d-flex align-items-center mb-2">
+              <div class="text-warning me-1">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+              </div>
+              <span class="text-muted small">4.5</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="fs-5 fw-bold">Rs.{discount_price}</span>
+                <span class="text-decoration-line-through text-muted ms-2">
+                  Rs.{product.price}
+                </span>
+              </div>
+
+              <button
+                class="btn btn-sm btn-outline-primary"
+                onClick={() => addCart(product)}
+              >
+                <i class="fa fa-shopping-cart"></i>
+                {/* <CiShoppingCart /> */}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
