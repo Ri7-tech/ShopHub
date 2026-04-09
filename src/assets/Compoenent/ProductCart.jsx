@@ -49,8 +49,8 @@ export default function ProductCart({ product }) {
 
   return (
     <>
-      <div class="col">
-        <div class="card h-100">
+      <div class="col ">
+        <div class="card">
           <div class="position-relative">
             <img src={product.image} class="card-img-top" alt="TV" />
             <span class="position-absolute top-0 start-0 badge bg-danger m-2">
@@ -62,7 +62,7 @@ export default function ProductCart({ product }) {
               className="text-decoration-none text-black"
               to={`${"/product/product-details/" + product.id}`}
             >
-              <h5 class="card-title">{product.name}</h5>
+              <h6 class="card-title">{product.name}</h6>
             </Link>
             <p class="card-text text-muted small mb-0">
               {product.category_name}
@@ -79,16 +79,18 @@ export default function ProductCart({ product }) {
             </div>
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <span class="fs-5 fw-bold">Rs.{discount_price}</span>
-                <span class="text-decoration-line-through text-muted ms-2">
+                <span class="fs-5 fw-bold fs-7">Rs.{discount_price}</span>
+                <span class="text-decoration-line-through text-muted ms-2 fs-7">
                   Rs.{product.price}
                 </span>
               </div>
 
               <button
-                class="btn btn-sm btn-outline-primary"
+                type="button"
+                class="btn btn-primary btn-sm"
                 onClick={() => addCart(product)}
               >
+                Add To Cart
                 <i class="fa fa-shopping-cart"></i>
                 {/* <CiShoppingCart /> */}
               </button>
