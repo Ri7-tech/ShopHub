@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       {/* <!-- Header --> */}
-      <nav class="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3">
+      <nav class="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3 border border-warning border-end-0 border border-start-0 ">
         <div class="container-fluid d-flex align-items-center justify-content-between">
           <Link class="navbar-brand fw-bold text-primary" to="/">
             ShopHub

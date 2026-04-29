@@ -49,10 +49,16 @@ export default function ProductCart({ product }) {
 
   return (
     <>
-      <div class="col ">
-        <div class="card">
-          <div class="position-relative">
-            <img src={product.image} class="card-img-top" alt="TV" />
+      {/*  This productCart component export To ProductListing Component Line Number 277 */}
+      <div class="col h-10">
+        <div class="card  bg-dark">
+          <div class="position-relative" style={{ height: "300px" }}>
+            <img
+              src={product.image}
+              class="card-img-top h-100"
+              style={{ objectFit: "cover" }}
+              alt="TV"
+            />
             <span class="position-absolute top-0 start-0 badge bg-danger m-2">
               Sale
             </span>
@@ -62,9 +68,11 @@ export default function ProductCart({ product }) {
               className="text-decoration-none text-black"
               to={`${"/product/product-details/" + product.id}`}
             >
-              <h6 class="card-title">{product.name}</h6>
+              <h6 class="card-title custom-text text-light fst-italic">
+                {product.name}
+              </h6>
             </Link>
-            <p class="card-text text-muted small mb-0">
+            <p class="card-text text-light fst-italic small mb-0 ">
               {product.category_name}
             </p>
             <div class="d-flex align-items-center mb-2">
@@ -75,11 +83,13 @@ export default function ProductCart({ product }) {
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star-half-alt"></i>
               </div>
-              <span class="text-muted small">4.5</span>
+              {/* <span class=" small text-light">4.5</span> */}
             </div>
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <span class="fs-5 fw-bold fs-7">Rs.{discount_price}</span>
+                <span class="fs-5 fw-bold fs-7 text-light">
+                  Rs.{discount_price}
+                </span>
                 <span class="text-decoration-line-through text-muted ms-2 fs-7">
                   Rs.{product.price}
                 </span>
