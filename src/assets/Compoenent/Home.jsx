@@ -39,14 +39,14 @@ export default function Home() {
       <div className="contanier-fluid">
         <div className="container">
           <div className="row">
-            {/* <div className="col-12 text-center py-3  fs-1">
+            <div className="col-12 text-center py-3  fs-1">
               {" "}
               OFFERS ARE BELOW
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
-      <h3 className="text-center mt-3">Offers are bellow</h3>
+      {/* <h3 className="text-center mt-3">Offers are bellow</h3> */}
       <div className="container-fluid">
         <div className="container">
           <div className="row" style={{ marginTop: "-20px" }}>
